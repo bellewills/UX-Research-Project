@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Group</title>
+  <link rel="stylesheet" href="withai.css">
+</head>
+<body>
+  <!-- Task -->
+  <header>
+    <a href="index.html" id="homeBtn">← Home</a>
+    <h1>Convergent thinking task here - TBD</h1>    
+  </header>
+  <section id="prompt">
+    <p><span id="concept">You can use the AI Assistant tool to help you</span></p>
+  </section>
+
+  <main id="workspace">
+    <!-- Left: AI Assistant -->
+    <section id="ai-section">
+      <div class="chatbox">
+        <div class="chat-header">
+          <h3>AI Assistant</h3>
+        </div>
+        <div class="chat-log" id="messages">
+          <div class="message ai">
+          </div>
+        </div>
+
+        <div class="chat-input">
+          <input type="text" id="userInput" placeholder="Ask AI for ideas..." />
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Right: Drawing Area -->
+    <section id="drawing-area">
+      <canvas id="drawingCanvas" width="700" height="500"></canvas>
+
+      <div id="tool-buttons">
+        <button id="penBtn">Pen</button>
+        <button id="eraserBtn">Eraser</button>
+        <button id="clearBtn">Clear</button>
+        <button id="saveBtn">Save Drawing</button>
+      </div>
+      <!-- Reflection Box -->
+      <div id="reflection-section">
+        <div class="text-box left-box">
+          <h3>Key Features</h3>
+          <textarea placeholder="             List a few key features of your design
+          • 
+          • 
+          • 
+          • 
+          "></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Chatbot JS -->
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      if (!message) return;
+
+      const messagesDiv = document.getElementById("messages");
+      messagesDiv.innerHTML += `<div class="message user">${message}</div>`;
+      input.value = "";
+
+      try {
+        const res = await fetch("http://localhost:3000/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+
+        messagesDiv.innerHTML += `<div class="message ai">${data.reply}</div>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      } catch (err) {
+        messagesDiv.innerHTML += `<div class="message ai">⚠️ Could not reach AI server.</div>`;
+      }
+    }
+
+    document.getElementById("sendBtn").addEventListener("click", sendMessage);
+    document.getElementById("userInput").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+
+  <!-- Drawing tools -->
+  <script src="script.js"></script>
+
+  <!-- Submission form -->
+  <form id="saveForm" action="https://formspree.io/f/mgvnpzpk" method="POST">
+    <input type="hidden" name="drawing" id="drawingInput">
+    <input type="hidden" name="keyFeatures" id="keyFeaturesInput">
+    <input type="hidden" name="userProfile" id="userProfileInput">
+  </form>
+</body>
+</html>
