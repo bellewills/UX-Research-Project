@@ -147,7 +147,7 @@ async function sendMessage() {
   const thinkingMsg = addMessage('ai', '💭 Thinking...');
   
   try {
-    const res = await fetch('https://research-ai-backend.onrender.com/chat', {
+    const res = await fetch('https://ux-research-project-ai-backend.onrender.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message })
