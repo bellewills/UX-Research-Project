@@ -4,30 +4,51 @@ const ctx = canvas.getContext('2d');
 let drawing = false;
 let erasing = false;
 
-// === Touch support for iPad === // **Need to check this Eraser isnt wokring only on ipad***
+// === Touch support for iPad === //
+// Added after testing because the eraser wasn’t working properly on touchscreens.
+// This handles all finger or stylus input on iPad and mirrors the mouse logic below.
+
+// When the user first touches the screen, start drawing
 canvas.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  const touch = e.touches[0];
-  const rect = canvas.getBoundingClientRect();
-  ctx.beginPath();
-  ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
-  drawing = true;
+  e.preventDefault(); // stop any page scrolling
+  const touch = e.touches[0]; // get the first touch point
+  const rect = canvas.getBoundingClientRect(); // find canvas position on screen
+  ctx.beginPath(); // begin a new path for drawing
+  ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top); // move to touch start position
+  drawing = true; // mark drawing as active
 });
 
+// When finger or stylus moves across the screen
 canvas.addEventListener('touchmove', (e) => {
-  e.preventDefault();
-  if (!drawing) return;
+  e.preventDefault(); // prevent page scrolling while drawing
+  if (!drawing) return; // stop if not currently drawing
   const touch = e.touches[0];
   const rect = canvas.getBoundingClientRect();
-  ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
-  ctx.stroke();
+  const x = touch.clientX - rect.left; // get x coordinate
+  const y = touch.clientY - rect.top;  // get y coordinate
+
+  if (erasing) {
+    // Eraser mode – clears a small square around touch point
+    ctx.clearRect(x - 8, y - 8, 16, 16);
+  } else {
+    // Pen mode – draws a smooth line following finger movement
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
 });
 
+// Stop the page from moving while user draws (mainly for Safari)
+document.body.addEventListener('touchmove', e => {
+  if (drawing) e.preventDefault();
+}, { passive: false });
+
+// When the user lifts finger or stylus, stop drawing
 canvas.addEventListener('touchend', () => {
-  drawing = false;
-  ctx.beginPath();
+  drawing = false; // stop drawing
+  ctx.beginPath(); // reset the path
 });
-
 // Canvas scaling mismatch - alignment - 
 function resizeCanvasToDisplaySize(canvas) {
   const rect = canvas.getBoundingClientRect();
