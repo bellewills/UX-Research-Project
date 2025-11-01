@@ -49,7 +49,7 @@ canvas.addEventListener('touchend', () => {
   drawing = false; // stop drawing
   ctx.beginPath(); // reset the path
 });
-// Canvas scaling mismatch - alignment - 
+// Canvas scaling mismatch - alignment 
 function resizeCanvasToDisplaySize(canvas) {
   const rect = canvas.getBoundingClientRect();
   const { width, height } = rect;
@@ -108,7 +108,7 @@ canvas.addEventListener('mousemove', (e) => {
 // Tool buttons
 const penBtn = document.getElementById('penBtn');
 const eraserBtn = document.getElementById('eraserBtn');
-const clearBtn = document.getElementById('clearBtn');
+// const clearBtn = document.getElementById('clearBtn'); //commented out from feedback saying we didn't need clear button
 
 penBtn.addEventListener('click', () => {
   erasing = false;
@@ -122,9 +122,9 @@ eraserBtn.addEventListener('click', () => {
   penBtn.classList.remove('active');
 });
 
-clearBtn.addEventListener('click', () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
+// clearBtn.addEventListener('click', () => { //commented out from feedback saying we didn't need clear button
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+// });
 
 penBtn.classList.add('active'); // default tool
 
