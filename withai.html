@@ -16,38 +16,30 @@
     <p><span id="concept">You can use the AI Assistant tool to help you</span></p>
   </section>
 
-  <main id="workspace">
-    <!-- Left: AI Assistant -->
-    <section id="ai-section">
-      <div class="chatbox">
-        <div class="chat-header">
-          <h3>AI Assistant</h3>
-        </div>
-        <div class="chat-log" id="messages">
-          <div class="message ai">
-          </div>
-        </div>
+ <main id="workspace">
+  <!-- Canvas section (top) -->
+  <section id="drawing-area">
+    <canvas id="drawingCanvas" width="800" height="500"></canvas>
 
-        <div class="chat-input">
-          <input type="text" id="userInput" placeholder="Ask AI for ideas..." />
-          <button id="sendBtn">Send</button>
-        </div>
+    <div id="tool-buttons">
+      <button id="penBtn">Pen</button>
+      <button id="eraserBtn">Eraser</button>
+      <button id="saveBtn">Save Drawing</button>
+    </div>
+  </section>
+
+  <!-- AI Assistant below the canvas -->
+  <section id="ai-section">
+    <div class="chatbox">
+      <h3>AI Assistant</h3>
+      <div id="messages" class="chat-log"></div>
+      <div class="chat-input">
+        <input id="userInput" type="text" placeholder="Ask AI for ideas..." />
+        <button id="sendBtn">Send</button>
       </div>
-    </section>
-
-
-    <!-- Right: Drawing Area -->
-    <section id="drawing-area">
-      <canvas id="drawingCanvas" width="700" height="500"></canvas>
-
-      <div id="tool-buttons">
-        <button id="penBtn">Pen</button>
-        <button id="eraserBtn">Eraser</button>
-         <!--- <<button id="clearBtn">Clear</button>> Corey feedback said to get rid of clear button, test with non participants and see if they want it or not then write about it-->
-        <button id="saveBtn">Save Drawing</button>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
   <!-- Chatbot JS -->
   <script>

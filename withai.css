@@ -20,74 +20,94 @@ header h1 {
   color: #4b4bb8;
 }
 
-/* ===== MAIN LAYOUT ===== */
+/* Layout – matches without AI */
 #workspace {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   padding: 40px 20px;
+  gap: 30px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-/* ===== LEFT: AI SECTION ===== */
-#ai-section {
-  flex: 1;
+/* Canvas area */
+#drawing-area {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  max-width: 350px;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+canvas {
+  border: 2px solid #ccc;
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  height: 500px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+/* Tool buttons */
+#tool-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+#tool-buttons button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #bdbdff;
+  color: #4b4bb8;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#tool-buttons button:hover {
+  background: #a3a3ff;
+  color: white;
+}
+
+/* AI Chat section */
+#ai-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .chatbox {
+  width: 90%;
+  max-width: 800px;
   background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   padding: 15px;
-  display: flex;
-  flex-direction: column;
-  height: 775px;
 }
 
 .chatbox h3 {
   color: #4b4bb8;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .chat-log {
-  flex: 1;
+  height: 220px;
   overflow-y: auto;
+  background: #f9f9ff;
   padding: 10px;
   border-radius: 8px;
-  background: #f9f9ff;
   text-align: left;
   margin-bottom: 10px;
 }
 
-.message {
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-
-.message.user {
-  text-align: right;
-  color: #333;
-}
-
-.message.ai {
-  text-align: left;
-  color: #4b4bb8;
-  background: #f0efff;
-  padding: 8px 10px;
-  border-radius: 8px;
-  display: inline-block;
-  max-width: 85%;
-}
-
-/* Chat input area */
 .chat-input {
   display: flex;
   gap: 5px;
@@ -95,14 +115,14 @@ header h1 {
 
 .chat-input input {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-family: inherit;
 }
 
 .chat-input button {
-  padding: 8px 14px;
+  padding: 10px 14px;
   border-radius: 8px;
   border: none;
   background: #bdbdff;
@@ -114,89 +134,9 @@ header h1 {
 
 .chat-input button:hover {
   background: #a3a3ff;
-  color: white
-}
-
-/* ===== RIGHT: DRAWING SECTION ===== */
-#drawing-area {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Canvas */
-canvas {
-  border: 2px solid #ccc;
-  background: white;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  width: 90%;
-  max-width: 800px;
-  height: 500px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Buttons */
-#tool-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 30px;
-}
-
-#tool-buttons button {
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
-  background: #bdbdff;
-  color: #4b4bb8;
-  cursor: pointer;
-  transition: 0.2s;
-  font-weight: 500;
-}
-
-#tool-buttons button:hover {
-  background: #a3a3ff;
   color: white;
 }
 
-/* Key Features */
-#reflection-section {
-  display: flex;
-  justify-content: center;
-  width: 90%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.text-box {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.text-box h3 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #4b4bb8;
-}
-
-.text-box textarea {
-  width: 100%;
-  height: 150px;
-  border-radius: 8px;
-  border: 2px solid #bbb;
-  padding: 10px;
-  background: #fafafa;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.3rem;
-  resize: vertical;
-}
 /* Home Button */
 #homeBtn {
   position: absolute;
@@ -217,19 +157,14 @@ canvas {
   color: white;
 }
 
-/* ===== RESPONSIVE ===== */
+/* Responsive */
 @media (max-width: 950px) {
-  #workspace {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #ai-section, #drawing-area {
-    width: 95%;
-  }
-
   canvas {
     width: 95%;
     height: 400px;
+  }
+
+  .chatbox {
+    width: 95%;
   }
 }
