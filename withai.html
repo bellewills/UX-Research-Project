@@ -43,20 +43,8 @@
       <div id="tool-buttons">
         <button id="penBtn">Pen</button>
         <button id="eraserBtn">Eraser</button>
-        <button id="clearBtn">Clear</button>
+         <!--- <<button id="clearBtn">Clear</button>> Corey feedback said to get rid of clear button, test with non participants and see if they want it or not then write about it-->
         <button id="saveBtn">Save Drawing</button>
-      </div>
-      <!-- Reflection Box -->
-      <div id="reflection-section">
-        <div class="text-box left-box">
-          <h3>Key Features</h3>
-          <textarea placeholder="             List a few key features of your design
-          • 
-          • 
-          • 
-          • 
-          "></textarea>
-        </div>
       </div>
     </section>
   </main>
@@ -73,7 +61,7 @@
       input.value = "";
 
       try {
-        const res = await fetch("http://localhost:3000/chat", {
+        const res = await fetch("http://localhost:3000/chat", { // localhost needs changing - che ck if thats why its taking ages for api 
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message })

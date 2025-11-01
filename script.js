@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 let drawing = false;
 let erasing = false;
 
-// === Touch support for iPad ===
+// === Touch support for iPad === // **Need to check this Eraser isnt wokring only on ipad***
 canvas.addEventListener('touchstart', (e) => {
   e.preventDefault();
   const touch = e.touches[0];
@@ -28,7 +28,7 @@ canvas.addEventListener('touchend', () => {
   ctx.beginPath();
 });
 
-// Canvas scaling mismatch - alignment 
+// Canvas scaling mismatch - alignment - 
 function resizeCanvasToDisplaySize(canvas) {
   const rect = canvas.getBoundingClientRect();
   const { width, height } = rect;
@@ -126,7 +126,7 @@ const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 
 let messageCount = 0;
-const maxMessages = 3; // Message limit - controlled veriable
+const maxMessages = 3; // Message limit - controlled veriable - change based on feedback
 
 async function sendMessage() {
   if (messageCount >= maxMessages) {
@@ -155,7 +155,7 @@ async function sendMessage() {
 
     const data = await res.json();
 
-    // Replace thinking text with animated AI reply
+    // Replace thinking text with animated AI reply - check AI reply time 
     setTimeout(() => {
       fadeInMessage(thinkingMsg, data.reply);
     }, 400);
@@ -164,7 +164,7 @@ async function sendMessage() {
   }
 }
 
-// Helper: append message to chat
+// Pppend message to chat
 function addMessage(sender, text) {
   const msgDiv = document.createElement('div');
   msgDiv.classList.add('message', sender);
@@ -174,7 +174,7 @@ function addMessage(sender, text) {
   return msgDiv;
 }
 
-// Helper: animate AI reply
+// Animate AI reply
 function fadeInMessage(element, text) {
   element.style.opacity = 0;
   element.innerHTML = `<p>${text}</p>`;

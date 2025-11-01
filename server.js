@@ -51,15 +51,15 @@ app.post("/chat", async (req, res) => {
     const data = await response.json();
     console.log("OpenAI response:", data); // just for checking responses in the console
 
-    // Grab the AI’s actual text reply, or a fallback message if missing
+    // Grab the AI’s actual text reply or fallback message if missing
     const aiReply = data.choices?.[0]?.message?.content || "No reply from AI";
-    res.json({ reply: aiReply }); // send the reply back to the frontend
+    res.json({ reply: aiReply }); // send  reply back to  frontend
   } catch (err) {
-    console.error("Server error:", err); // log the full error in the console
+    console.error("Server error:", err); // log the full error in console
     res.status(500).json({ reply: "Error talking to AI" }); // send a clear error message to the browser
   }
 });
 
-// Start the server – Render will assign a port automatically in production
+// Start the server - Render will assign a port auto in production
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
