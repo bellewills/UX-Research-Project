@@ -29,7 +29,7 @@ canvas.addEventListener('touchmove', (e) => {
 
   if (erasing) {
     // Eraser mode – clears a small square around touch point
-    ctx.clearRect(x - 8, y - 8, 16, 16);
+    ctx.clearRect(x - 15, y - 15, 30, 30); // size
   } else {
     // Pen mode – draws a smooth line following finger movement
     ctx.lineTo(x, y);
@@ -94,7 +94,7 @@ canvas.addEventListener('mousemove', (e) => {
   const pos = getMousePos(canvas, e);
 
   if (erasing) {
-    ctx.clearRect(pos.x - 8, pos.y - 8, 16, 16);
+    ctx.clearRect(pos.x - 15, pos.y - 15, 30, 30); 
   } else {
     ctx.lineWidth = 3;
     ctx.lineCap = 'round';
