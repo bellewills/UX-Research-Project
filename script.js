@@ -159,74 +159,94 @@ saveBtn.addEventListener('click', () => {
 });
 
 // ==================== AI CHAT SYSTEM ==================== //
+// Only run on the withAI page - guards prevent errors on the withoutAI page
 const messagesDiv = document.getElementById('messages');
-const userInput = document.getElementById('userInput');
-const sendBtn = document.getElementById('sendBtn');
+const userInput   = document.getElementById('userInput');
+const sendBtn     = document.getElementById('sendBtn');
 
-let messageCount = 0;
-const maxMessages = 3; // Message limit - controlled veriable - change based on feedback
+if (messagesDiv && userInput && sendBtn) {
+  // Conversation memory sent to  server every turn
+  const conversation = [
+    {
+      role: 'system',
+      content:
+        'You are a helpful assistant for a design workshop. Give short, clear, ' +
+        'structured answers (3–4 bullets, <=15 words each). Focus on ONE coherent idea.'
+    }
+  ];
 
-async function sendMessage() {
-  if (messageCount >= maxMessages) {
-    addMessage('ai', '⚠️ You’ve reached the message limit for this task.');
-    userInput.disabled = true;
-    sendBtn.disabled = true;
-    return;
+  let messageCount = 0;
+  const maxMessages = 3; // adjust if needed
+
+  function addMessage(sender, text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('message', sender);
+    msgDiv.innerHTML = `<p>${text}</p>`;
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    return msgDiv;
   }
 
-  const message = userInput.value.trim();
-  if (!message) return;
-
-  // Add user message
-  addMessage('user', message);
-  userInput.value = '';
-
-  // Add thinking message
-  const thinkingMsg = addMessage('ai', '💭 Thinking...');
-  
-  try {
-    const res = await fetch('https://ux-research-project-ai-backend.onrender.com/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message })
-    });
-
-    const data = await res.json();
-
-    // Replace thinking text with animated AI reply - check AI reply time 
-    setTimeout(() => {
-      fadeInMessage(thinkingMsg, data.reply);
-    }, 400);
-  } catch {
-    fadeInMessage(thinkingMsg, '⚠️ Could not reach AI server.');
+  function fadeInMessage(el, text) {
+    el.style.opacity = 0;
+    el.innerHTML = `<p>${text}</p>`;
+    let o = 0;
+    const fade = setInterval(() => {
+      o += 0.05;
+      el.style.opacity = o;
+      if (o >= 1) clearInterval(fade);
+    }, 30);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
-}
 
-// Pppend message to chat
-function addMessage(sender, text) {
-  const msgDiv = document.createElement('div');
-  msgDiv.classList.add('message', sender);
-  msgDiv.innerHTML = `<p>${text}</p>`;
-  messagesDiv.appendChild(msgDiv);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  return msgDiv;
-}
+  async function sendMessage() {
+    if (messageCount >= maxMessages) {
+      addMessage('ai', 'You’ve reached the message limit. Lock in your single best design on the canvas.');
+      userInput.disabled = true;
+      sendBtn.disabled = true;
+      return;
+    }
 
-// Animate AI reply
-function fadeInMessage(element, text) {
-  element.style.opacity = 0;
-  element.innerHTML = `<p>${text}</p>`;
-  let opacity = 0;
-  const fade = setInterval(() => {
-    opacity += 0.05;
-    element.style.opacity = opacity;
-    if (opacity >= 1) clearInterval(fade);
-  }, 30);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
+    const text = userInput.value.trim();
+    if (!text) return;
 
-// Event listeners for chat
-sendBtn.addEventListener('click', sendMessage);
-userInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') sendMessage();
-});
+    // show user message + add to memory
+    addMessage('user', text);
+    conversation.push({ role: 'user', content: text });
+    userInput.value = '';
+
+    // placeholder while we wait
+    const thinkingMsg = addMessage('ai', 'Thinking…');
+
+    try {
+      // Send the entire conversation each turn
+      const res = await fetch('https://ux-research-project-ai-backend.onrender.com/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: conversation })
+      });
+
+      const data = await res.json();
+      const reply = data.reply || 'No reply.';
+
+      // show + remember assistant reply
+      fadeInMessage(thinkingMsg, reply);
+      conversation.push({ role: 'assistant', content: reply });
+
+      // count only after a successful round-trip
+      messageCount += 1;
+      if (messageCount >= maxMessages) {
+        addMessage('ai', 'Limit reached. Use the canvas to finalise your one idea.');
+        userInput.disabled = true;
+        sendBtn.disabled = true;
+      }
+    } catch {
+      fadeInMessage(thinkingMsg, 'Could not reach the AI server.');
+    }
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+}
