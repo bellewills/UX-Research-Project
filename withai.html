@@ -14,13 +14,18 @@
   </header>
   <section id="prompt">
     <p><span id="concept">Think about how they could work together as one new functional or symbolic object.
-Present one final idea only.</span></p>
+    Present one final idea only.</span></p>
   </section>
   <!-- Object images -->
   <div id="object-images">
     <img src="assets/images/candle.jpg" alt="Candle">
     <img src="assets/images/remote.jpg" alt="Remote Control">
     <img src="assets/images/glass.jpg" alt="Glass">
+  </div>
+  <!-- Participant number bar -->
+  <div id="participant-bar">
+    <label for="participantId">Participant number</label>
+    <input id="participantId" type="text" inputmode="numeric" placeholder="e.g. 07">
   </div>
  <main id="workspace">
   <!-- Canvas section (top) -->
@@ -85,7 +90,7 @@ Present one final idea only.</span></p>
   <!-- Submission form -->
   <form id="saveForm" action="https://formspree.io/f/mgvnpzpk" method="POST">
     <input type="hidden" name="drawing" id="drawingInput">
-    <input type="hidden" name="keyFeatures" id="keyFeaturesInput">
+    <input type="hidden" name="participantNumber" id="participantNumberInput">
     <input type="hidden" name="userProfile" id="userProfileInput">
   </form>
 </body>

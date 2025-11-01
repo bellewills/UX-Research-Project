@@ -130,15 +130,32 @@ penBtn.classList.add('active'); // default tool
 
 // ==================== SAVE FUNCTION ==================== //
 const saveBtn = document.getElementById('saveBtn');
-const keyFeaturesBox = document.querySelector('.left-box textarea');
 
+// when the user clicks save, send everything to Formspree
 saveBtn.addEventListener('click', () => {
+  // get the participant number
+  const participantField = document.getElementById('participantId');
+  const participantHidden = document.getElementById('participantNumberInput');
+  const participantNumber = (participantField?.value || '').trim();
+
+  // stop them from saving if no participant number is entered
+  if (!participantNumber) {
+    alert('Please enter the participant number before saving.');
+    return;
+  }
+
+  // copy the visible participant number into the hidden form field
+  if (participantHidden) participantHidden.value = participantNumber;
+
+  // convert the canvas drawing into image data
   const drawingData = canvas.toDataURL('image/png');
   document.getElementById('drawingInput').value = drawingData;
-  document.getElementById('keyFeaturesInput').value = keyFeaturesBox.value;
 
+  // submit the form to Formspree
   document.getElementById('saveForm').submit();
-  alert("Thank you! Your response has been submitted.");
+
+  // small confirmation pop-up
+  alert('Thank you! Your response has been submitted.');
 });
 
 // ==================== AI CHAT SYSTEM ==================== //
