@@ -61,7 +61,7 @@
       input.value = "";
 
       try {
-        const res = await fetch("http://localhost:3000/chat", { // localhost needs changing - che ck if thats why its taking ages for api 
+        const res = await fetch("https://ux-research-project-ai-backend.onrender.com/chat", {// localhost needs changing to render server 
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message })
