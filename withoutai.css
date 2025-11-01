@@ -157,8 +157,8 @@ canvas {
 }
 
 #object-images img {
-  width: 90px;
-  height: auto;
+  width: 200px;
+  height: 200px;
   border-radius: 10px;
   border: 2px solid #d6d6f0;
   background: #ffffff;
