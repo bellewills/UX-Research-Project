@@ -11,6 +11,8 @@ header {
   text-align: center;
   background: #fafafa;
   padding: 20px;
+  position: relative;
+  padding-left: 60px; /* creates space for the home button */
   border-bottom: 2px solid #d6d6d6ec;
 }
 
@@ -116,20 +118,23 @@ canvas {
   font-family: 'Poppins', sans-serif;
   font-size: 1.3rem;
 }
-/* Home Button */
+/* Home button (top-left corner, smaller + tidier) */
 #homeBtn {
   position: absolute;
-  top: 18px;
-  left: 25px;
-  background: #bdbdff;
+  top: 12px;
+  left: 18px;
+  background: #dcdcff;
   color: #4b4bb8;
   text-decoration: none;
   font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 8px;
+  font-size: 0.8rem;  /* smaller text */
+  padding: 4px 10px;  /* reduced padding */
+  border-radius: 6px;
   transition: 0.2s ease;
-  font-size: 0.95rem;
+  line-height: 1;
+  z-index: 5; /* keeps it above other elements without covering text */
 }
+
 
 #homeBtn:hover {
   background: #a3a3ff;
