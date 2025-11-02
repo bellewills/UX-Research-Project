@@ -53,39 +53,7 @@
   </section>
 </main>
 
-  <!-- Chatbot JS -->
-  <script>
-    async function sendMessage() {
-      const input = document.getElementById("userInput");
-      const message = input.value.trim();
-      if (!message) return;
-
-      const messagesDiv = document.getElementById("messages");
-      messagesDiv.innerHTML += `<div class="message user">${message}</div>`;
-      input.value = "";
-
-      try {
-        const res = await fetch("https://ux-research-project-ai-backend.onrender.com/chat", {// localhost needs changing to render server 
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message })
-        });
-        const data = await res.json();
-
-        messagesDiv.innerHTML += `<div class="message ai">${data.reply}</div>`;
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
-      } catch (err) {
-        messagesDiv.innerHTML += `<div class="message ai">⚠️ Could not reach AI server.</div>`;
-      }
-    }
-
-    document.getElementById("sendBtn").addEventListener("click", sendMessage);
-    document.getElementById("userInput").addEventListener("keypress", (e) => {
-      if (e.key === "Enter") sendMessage();
-    });
-  </script>
-
-  <!-- Drawing tools -->
+  <!-- Drawing tools and AI chat -->
   <script src="script.js"></script>
 
   <!-- Submission form -->

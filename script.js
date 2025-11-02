@@ -171,12 +171,13 @@ if (messagesDiv && userInput && sendBtn) {
       role: 'system',
       content:
         'You are a helpful assistant for a design workshop. Give short, clear, ' +
-        'structured answers (3–4 bullets, <=15 words each). Focus on ONE coherent idea.'
+      'structured answers (3 bullets, ≤15 words each). Focus on ONE coherent idea. ' +
+      'Do not repeat earlier suggestions in this conversation; vary the concept.'
     }
   ];
 
   let messageCount = 0;
-  const maxMessages = 3; // adjust if needed
+  const maxMessages = 10; // adjust if needed
 
   function addMessage(sender, text) {
     const msgDiv = document.createElement('div');
