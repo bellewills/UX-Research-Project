@@ -1,7 +1,7 @@
 
 Evaluating User Experience in Digital Technologies — Comparative Study
 
-Project Title: Exploring Convergent Thinking with and without AI Assistance
+Project Title: What affect does AI assistance have on creative expression in a web-based drawing platform?
 Authors: Belle Williams & Keya Datta
 Unit: Methods 5: Evaluating User Experience in Digital Technologies
 Institution: University of the Arts London (UAL)
@@ -9,8 +9,8 @@ Year: 2025
 
 Overview
 
-This project investigates how AI-assisted creativity tools influence user experience and creative output during convergent thinking tasks.
-Participants complete a short design exercise in two modes — with AI and without AI — to compare how each approach shapes idea development, engagement, and perceived creativity.
+This project investigates how AI-assisted creativity tools influence user experience and creative output during a convergent thinking task.
+Participants complete a short design exercise in two modes, with AI and without AI, to compare how each approach shapes idea development, engagement, and perceived creativity.
 
 The study focuses on how users interact with digital drawing interfaces and generative AI prompts when producing a single integrated idea under time constraints.
 
@@ -27,7 +27,7 @@ Both sessions use the same creative brief and are followed by post-task question
 Convergent Thinking Task
 
 You are given three elements: Memory, Glass, and Light.
-Your goal is to combine them into one single futuristic design.
+Your task: Combine them into one single futuristic design.
 Think about how these could work together as a new functional or symbolic creation — something that could exist in the near or distant future.
 Present one final, well-defined idea only.
 
