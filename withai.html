@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research Group</title>
-  <link rel="stylesheet" href="withai.css">
-</head>
-<body>
-  <!-- Task -->
-  <header>
-      <a href="index.html" id="homeBtn">← Home</a>
-      <h1>You are given three elements: Memory, Glass, and Light.
-      Your task: Combine them into one single futuristic design.</h1>    
-    </header>
-    <section id="prompt">
-      <p><span id="concept">Think about how these could work together as a new functional or symbolic creation — something that could exist in the near or distant future.
-      Present one final, well-defined idea only. Feel free to use the AI tool at the bottom.</span></p>
-    </section>
-  <!-- Object images -->
-  <div id="object-images">
-    <img src="assets/images/memory.jpg" alt="Candle">
-    <img src="assets/images/glass.jpg" alt="Remote Control">
-    <img src="assets/images/candle.jpg" alt="Glass">
-  </div>
-  <!-- Participant number bar -->
-  <div id="participant-bar">
-    <label for="participantId">Participant number</label>
-    <input id="participantId" type="text" inputmode="numeric" placeholder="e.g. 07">
-  </div>
- <main id="workspace">
-  <!-- Canvas section (top) -->
-  <section id="drawing-area">
-    <canvas id="drawingCanvas" width="800" height="500"></canvas>
-
-    <div id="tool-buttons">
-      <button id="penBtn">Pen</button>
-      <button id="eraserBtn">Eraser</button>
-      <button id="saveBtn">Save Drawing</button>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Group</title>
+    <link rel="stylesheet" href="withai.css">
+  </head>
+  <body>
+    <!-- Task -->
+    <header>
+        <a href="index.html" id="homeBtn">← Home</a>
+        <h1>You are given three elements: Memory, Glass, and Light.
+        Your task: Combine them into one single futuristic design.</h1>    
+      </header>
+      <section id="prompt">
+        <p><span id="concept">Think about how these could work together as a new functional or symbolic creation — something that could exist in the near or distant future.
+        Present one final, well-defined idea only. Feel free to use the AI tool at the bottom.</span></p>
+      </section>
+    <!-- Object images -->
+    <div id="object-images">
+      <img src="assets/images/memory.jpg" alt="Candle">
+      <img src="assets/images/glass.jpg" alt="Remote Control">
+      <img src="assets/images/candle.jpg" alt="Glass">
     </div>
-  </section>
-
-  <!-- AI Assistant below the canvas -->
-  <section id="ai-section">
-    <div class="chatbox">
-      <h3>AI Assistant</h3>
-      <div id="messages" class="chat-log"></div>
-      <div class="chat-input">
-        <input id="userInput" type="text" placeholder="Ask AI for ideas..." />
-        <button id="sendBtn">Send</button>
-      </div>
+    <!-- Participant number bar -->
+    <div id="participant-bar">
+      <label for="participantId">Participant number</label>
+      <input id="participantId" type="text" inputmode="numeric" placeholder="e.g. 07">
     </div>
-  </section>
-</main>
+    <main id="workspace">
+      <!-- Canvas section (top) -->
+      <section id="drawing-area">
+        <canvas id="drawingCanvas" width="800" height="500"></canvas>
 
-  <!-- Drawing tools and AI chat -->
-  <script src="script.js"></script>
+        <div id="tool-buttons">
+          <button id="penBtn">Pen</button>
+          <button id="eraserBtn">Eraser</button>
+          <button id="saveBtn">Save Drawing</button>
+        </div>
+      </section>
 
-  <!-- Submission form -->
-  <form id="saveForm" action="https://formspree.io/f/mgvnpzpk" method="POST">
-    <input type="hidden" name="drawing" id="drawingInput">
-    <input type="hidden" name="participantNumber" id="participantNumberInput">
-    <input type="hidden" name="userProfile" id="userProfileInput">
-  </form>
-</body>
+      <!-- AI Assistant below the canvas -->
+      <section id="ai-section">
+        <div class="chatbox">
+          <h3>AI Assistant</h3>
+          <div id="messages" class="chat-log"></div>
+          <div class="chat-input">
+            <input id="userInput" type="text" placeholder="Ask AI for ideas..." />
+            <button id="sendBtn">Send</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Drawing tools and AI chat -->
+    <script src="script.js"></script>
+
+    <!-- Submission form -->
+    <form id="saveForm" action="https://formspree.io/f/mgvnpzpk" method="POST">
+      <input type="hidden" name="drawing" id="drawingInput">
+      <input type="hidden" name="participantNumber" id="participantNumberInput">
+      <input type="hidden" name="userProfile" id="userProfileInput">
+    </form>
+  </body>
 </html>
